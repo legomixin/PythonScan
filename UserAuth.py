@@ -15,14 +15,14 @@ import json
 import Config
 
 def print_func( par ) :
-    userInfo = json.loads(http_userinfo())
-    print userInfo['nickname'] #打印用户信息
-    return
+    #userInfo = json.loads(http_userinfo())
+    #print userInfo['nickname'] #打印用户信息
+    return http_userinfo( par )
 
 #http请求
-def http_userinfo() :
-    result =  Config.get_config_values('userinfo', 'url')
-    response = urllib2.urlopen(result)
-    print response.read()
-
+def http_userinfo( token ) :
+    #获取认证url信息
+    result =  Config.get_config_values('usertoken', 'url')
+    res = urllib2.Request(url=result, data=token)
+    response = urllib2.urlopen(res)
     return response.read()

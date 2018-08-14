@@ -7,11 +7,29 @@ import sys, getopt
 #导入用户认证模块
 import UserAuth
 
-UserAuth.print_func("Runoob")
-
-#def main():
-#    print '参数个数为:' , len(sys.argv), '个数。'
-#    print '参数列表:' , str(sys.argv)
+def main():
+    user_token = ''
+    #获取用户输入的认证码，如果没有输入校验码提示用户输入
+    if len(sys.argv) < 2:
+        print '请出入验证码格式为：Cmstopscan.py -u <token>'
+        sys.exit()
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hu:")
+    except getopt.GetoptError:
+        print 'Cmstopscan.py -u <token>'
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print 'Cmstopscan.py -u <token>'
+            sys.exit()
+        elif opt == "-u":
+            user_token = arg
+    #判断验证码是否正确
+    u = UserAuth.print_func(user_token)
+    if u == "true":
+        print "ok"
+    else:
+        print "请输入正确的验证码！"
 
 
 if __name__ == '__main__':
