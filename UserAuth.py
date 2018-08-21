@@ -7,22 +7,34 @@ Time: 2018-08-09 15:30
 Describe: 用户认证模块
 '''
 
-#官方库文件
-import urllib2
-import json
+'''
+引入官方库文件
+Introducing the official library file
+'''
+import urlparse
 
-#自己编写的库文件
+'''
+引入本地库文件
+Introducing local library files
+'''
 import Config
+import Http
 
-def print_func( par ) :
-    #userInfo = json.loads(http_userinfo())
-    #print userInfo['nickname'] #打印用户信息
-    return http_userinfo( par )
+'''
+判断用户校验码是否正确
+Determine if the user check code is correct
+'''
+def user_check_code( token ) :
+    url = Config.get_config_values('usertoken', 'url')
+    urlToken = urlparse.urljoin(url, token)
+    res = Http.http_post( urlToken  )
+    return res
 
-#http请求
-def http_userinfo( token ) :
-    #获取认证url信息
-    result =  Config.get_config_values('usertoken', 'url')
-    res = urllib2.Request(url=result, data=token)
-    response = urllib2.urlopen(res)
-    return response.read()
+'''
+测试方法
+Test function
+'''
+if __name__ == '__main__':
+    print_func('PIWJTDQxx0HKwKUQeZIqTbKL')
+
+

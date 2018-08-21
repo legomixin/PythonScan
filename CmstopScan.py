@@ -6,6 +6,7 @@ import sys, getopt
 
 #导入用户认证模块
 import UserAuth
+import VirusLibrary
 
 def main():
     user_token = ''
@@ -25,9 +26,11 @@ def main():
         elif opt == "-u":
             user_token = arg
     #判断验证码是否正确
-    u = UserAuth.print_func(user_token)
-    if u == "true":
-        print "ok"
+    u = UserAuth.user_check_code(user_token)
+    if u == "200":
+        VirusLibrary.scan_trojan()
+        #调用木马扫描文件
+        #print "ok"
     else:
         print "请输入正确的验证码！"
 
