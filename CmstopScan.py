@@ -28,7 +28,7 @@ def main():
     #判断验证码是否正确
     u = UserAuth.user_check_code(user_token)
     if u == "200":
-        VirusLibrary.scan_trojan()
+        VirusLibrary.clear_trojan_rule()
         #调用木马扫描文件
         #print "ok"
     else:

